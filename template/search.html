@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Forms</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "/css/animate.css/" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js">
+  </script>
+
+<style media="screen">
+
+input{
+  height: 30px;
+  width: 200px;
+}
+
+button{
+  width: 150px;
+  height: 35px;
+}
+body{
+
+  background:  #E2CC70;;
+}
+
+::-webkit-scrollbar {
+width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+background: linear-gradient(white,white);
+}
+
+
+.back{
+  background: #fff;
+  border-radius: 20px;
+  margin-bottom:50px;
+  padding: 50px;
+}
+
+
+label{
+  font-size: 25px;
+  font-weight: 200;
+}
+
+
+button{
+  float: right;
+  background:
+}
+
+th{
+  font-size: 38px;
+}
+.cmt{
+color: #ccc;
+}
+
+.heading{
+  margin:20px;
+  text-align: center;
+  color: white;
+}
+
+#Ref{
+  display: none;
+}
+
+</style>
+
+  </head>
+  <body>
+
+<div class="half">
+  <div>
+    <div class="full">
+
+    </div>
+
+    <div class="heading">
+        <h1>Search For Stock  <img src="{% static 'images/search1.png' %}" height="50px" width="50px"></h1>
+    </div>
+
+    <div class="back container">
+
+              <div class="table-responsive">
+                <h2 class="cmt">At least one entry should be correctly filled..<a href="{% url 'goto:index' %}"><button class="btn btn-success">Goto Home</button></a></h2>
+                <form method="POST">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Entry</th>
+                      <th>Field</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for i in form %}
+                    <tr>
+                      <td><label id={{ i.label }} for="id">{{ i.label }}</label></td>
+                      <td>{{ i }}
+                        {{ i.errors }}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                      {% csrf_token %}
+                  </tbody>
+                </table>
+                  <button type="submit" class="btn btn-info">Search Stock</button>
+                </div>
+              </form>
+    </div>
+
+
+  </body>
+
+  <script type="text/javascript">
+  $("#id_expected_date_for_new_stock").datepicker();
+  $("#id_purchase_date").datepicker();
+  </script>
+</html>

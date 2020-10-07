@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Forms</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "/css/animate.css/" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style media="screen">
+
+
+  .small{
+    font-size: 15px;
+    color: gray;
+  }
+.left{
+  float: left;
+}
+.right{
+  float:right;
+}
+
+body{
+height: 100%;
+/* background:linear-gradient(#80d0c7,#13547a); */
+background: #E2CC70;
+font-family: sans-serif;
+color: white;
+}
+
+::-webkit-scrollbar {
+width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+background: linear-gradient(gray,white);
+}
+
+
+.btn{
+transition: 0.5s all;
+width: 150px;
+height: 35px;
+text-decoration: none;
+color: #fff;
+font-size: 15px;
+}
+
+.btn:hover{
+  transition: 0.5s all;
+  width: 180px;
+  height: 35px;
+  color: #fff;
+}
+
+
+.top-sec{
+  background: #fefefe;
+}
+
+.card{
+  background: #fff;
+  padding: 10px;
+  overflow: hidden;
+  margin: 10px 20px 20px 0px;
+  border-radius: 5px;
+  border-top:2px solid orangered;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+}
+
+.mid-sec{
+margin-top:2%;
+border: 2px dotted #ddd;
+margin-bottom: 5px;
+}
+
+.name,.info{
+  font-size: 20px;
+  color: #000;
+  font-weight: 600;
+}
+
+.heading{
+text-align: center;
+margin-top: 20px;
+}
+
+.heading h1{
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+
+.heading h2{
+font-size: 28px;
+}
+
+.input{
+  width: 120px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+  padding-left: 10px;
+}
+
+.mid-sec h4{
+text-transform: capitalize;
+font-size: 20px;
+color: #000;
+}
+
+.inside{
+  overflow-y: scroll;
+  height: 450px;
+}
+
+.desc{
+border: 2px dotted #ddd;
+margin-bottom: 5px;
+color: black;
+text-transform: capitalize;
+}
+
+#id_Action{
+float: right;
+margin: 10px;
+height: 30px;
+  margin-bottom: 50px;
+}
+
+#submit-btn{
+  float: right;
+  margin-top: 8px;
+  margin-right: 100px;
+
+}
+.img-search{
+  height: 50px;
+  width: 50px;
+}
+
+.action{
+  font-size: 18px;
+  float: right;
+  margin: 10px;}
+
+
+</style>
+
+
+  </head>
+  <body>
+
+
+  {% if result %}
+
+<div class="heading">
+    <h1>Stocks Related To Your Search</h1>
+    <h2 class="animated bounceInRight"><img class="img-search" src="{% static 'images/search1.png' %}"> Total Result Found :<span class="animated bounce">{{ count }}</span></h2>
+</div>
+<a href="{% url 'goto:index' %}"><button class="btn size left btn-success">Goto Home</button></a>
+<form action="" method="post">
+<input id="submit-btn" type="submit" class="btn btn-info" value="Apply">
+{% for i in form %}
+{{ i }}
+{% endfor %}
+  {% csrf_token %}
+</form>
+
+    <div class="inside container">
+
+      {% for i in result %}
+
+
+<div class="card animated bounceInLeft">
+
+  <div class="container top-sec">
+    <h4 class="left small">Identity:{{i.id}}</h4>
+    <p class="right small" style="margin:6px 10px 0 0;">select</p>
+    <input style="margin:12px 2px 0 30px;" class="right" name="select"  type="checkbox" value={{i.id}} id={{i.id}}>
+    <h4 class="right small">Rem. Qty:{{i.quantity}}</h4>
+  </div>
+
+  <div class="mid-sec container">
+   <div class="left">
+     <h4><span class="name">Name: </span>{{i.name}}</h4>
+     <h4><span class="name">Distributor Name: </span>{{i.distributor_name}}</h4>
+     <h4><span class="name">Distributor-Number: </span><input class="input" type="text" value="{{i.distributor_no}}" readonly> </h4>
+     <h4><span class="name">Distributor-Email: </span>{{ i.distributor_email }}</h4>
+     <h4><span class="name">Current Qty: </span>{{i.quantity}}</h4>
+
+   </div>
+
+   <div class="right">
+     <h4><span class="info">Purchase Date: </span>{{i.purchase_date}}</h4>
+     <h4><span class="info">Base Price: </span>{{i.base_price}}</h4>
+     <h4><span class="info">Total Qty: </span>{{i.total_quantity}}</h4>
+     <h4><span class="info">Expected Date(New Stock): </span>{{i.expected_date_for_new_stock}}</h4>
+   </div>
+ </div>
+
+ <div class="bot-sec">
+   <div class="desc container">
+     <h4><span style="font-weight:600;text-transform:capitalize;">Description: </span>{{i.description}}</h4>
+   </div>
+   <div class="btns right">
+     <a href="{% url 'goto:edit' pk=i.id %}"><button class="btn btn-success" type="button">Edit</button></a>
+     <a href="{% url 'goto:del_object' pk=i.id %}"><button class="btn btn-danger" type="button">Delete</button></a>
+   </div>
+ </div>
+</div>
+
+      {% endfor %}
+      {% endif %}
+    </div>
+
+
+<script>
+
+
+
+function findit(a,k){
+  for (var i=0;i < a.length ; i++){
+    if (a[i]==k){
+    return 1;}
+  }
+  return 0;
+};//findit
+function removeit(a,k){
+  var kar='';
+  for(var i=0;i<a.length;i++){
+
+    if (a[i]==k){}
+    else{console.log(a[i]);
+      kar+=a[i]+'-'};
+  };
+  return kar
+};//removeit
+
+
+{% if result %}
+{% for i in result %}
+var tem=0
+document.getElementById({{i.id}}).onclick = function() {
+  var tem=0
+    if ( this.checked ) {
+      var tem=0
+      tem=document.getElementById('id_list').value
+      tem+={{i.id}}+'-'
+      document.getElementById('id_list').value=tem
+        //alert( this.value );
+        //alert(document.getElementById('id_list').value );
+    } else {
+      var tem=0
+      tem=document.getElementById('id_list').value
+      tem=tem.split("-")
+      tem=tem.slice(0, tem.length-1)
+      //console.log(findit(tem,{{i.id}})==1)
+      if (findit(tem,{{i.id}})==1){
+        tem=removeit(tem,{{i.id}})
+        //alert(tem)
+        document.getElementById('id_list').value=tem
+      }
+
+
+    };
+    {{ form.list.value }} = tem;
+    //alert(tem);
+    //console.log(tem)
+};
+{% endfor %}
+{% endif %}
+</script>
+</body>
+</html>

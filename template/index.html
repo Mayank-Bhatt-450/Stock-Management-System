@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>first project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static "/css/animate.css/" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style media="screen">
+
+    body{
+      background: #E2CC70;
+      height: 100%;
+      overflow: hidden;
+    }
+
+
+    ::-webkit-scrollbar {
+    width: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: linear-gradient(rgb(252,53,108),rgb(254,124,65));
+    }
+
+
+    @-webkit-keyframes rotating /* Safari and Chrome */ {
+      from {
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes rotating {
+      from {
+        -ms-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      to {
+        -ms-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+
+    .rotating {
+  -webkit-animation: rotating 5s linear infinite;
+  -moz-animation: rotating 5s linear infinite;
+  -ms-animation: rotating 5s linear infinite;
+  -o-animation: rotating 5s linear infinite;
+  animation: rotating 5s linear infinite;
+}
+      .main{
+        position: absolute;
+        width: 100%;
+        top: 45%;
+        transform: translateY(-45%);
+
+      }
+
+      .box{
+        width: 400px;
+        height: 450px;
+        border-radius: 5px;
+        opacity: 0.8;
+      }
+
+      .one{
+        margin-top: 120px;
+        border: 10px solid #73B4F2;
+      }
+      .two{
+        margin-top: 10px;
+        border: 10px solid #95EE45;
+      }
+      .three{
+          margin-top: 80px;
+          border: 10px solid #FC9D7D;
+      }
+
+
+
+.heading{
+  text-align: center;
+}
+      .heading h1{
+        font-size: 60px;
+        margin-bottom: 20px;
+      }
+
+      .heading h4{
+        font-size: 30px;
+        color: #333;
+      }
+
+.design{
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-30%,-50%);
+}
+
+.btn{
+  transition: 0.7s all;
+  width: 180px;
+  height: 50px;
+  background: #1f1f1f;
+  border-radius: 200px;
+  font-size: 25px;
+  float: left;
+  margin-right: 20px;
+  border:0;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.btn-search{
+  background: linear-gradient(rgb(252,53,108),rgb(254,124,65));
+}
+
+.btn:hover{
+  transition: 0.7s all;
+  width: 220px;
+  background: linear-gradient(rgb(252,53,108),rgb(254,124,65));
+  color: #fff;
+}
+
+
+  .mid-content{
+    position: absolute;
+    top: 70%;
+    left: 52%;
+    transform: translate(-52%,-70%);
+  }
+
+
+.col {
+  float: left;
+  padding: 5px;
+}
+
+
+    </style>
+
+
+
+          <script type="text/javascript">
+              function redirect(a){
+                switch (a) {
+                  case 1: window.location.href="{% url 'goto:search' %}";
+                  break;
+                  case 2:window.location.href="{% url 'goto:product_entry_page' %}";
+                    break;
+                  case 3:window.location.href="{% url 'goto:setting' %}";
+                    break;
+                }
+              }
+          </script>
+
+  </head>
+
+
+  <body>
+    <section>
+
+
+        <div class="design">
+          <div class="row">
+            <div class="col" style="width:  33.33%;">
+              <div class="box one rotating"></div>
+            </div>
+            <div class="col" style="width:  33.33%;">
+              <div class="box two rotating"></div>
+            </div>
+            <div class="col" style="width:  33.33%;">
+              <div class="box three rotating"></div>
+            </div>
+          </div>
+        </div>
+
+
+      <div class="main container-fluid">
+
+        <div class="heading animated infinite bounce">
+          <h1>Stock <span style="font-size:70px; color:#FFF;">Management</span> System</h1>
+          <h4>Managing Stock becomes Easy Now</h4>
+        </div>
+      </div>
+
+
+              <div class="mid-content">
+                <button class="btn animated fadeInLeftBig" onclick="redirect(2)" type="button" name="button">Entry</button>
+                <button class="btn btn-search animated rubberBand" onclick="redirect(1)" type="button" name="button">Search</button>
+                <button class="btn animated fadeInRightBig" onclick="redirect(3)" type="button" name="button">Setting</button>
+
+              </div>
+
+              <div class="mid-content">
+
+              </div>
+
+    </section>
+
+
+
+  </body>
+
+</html>

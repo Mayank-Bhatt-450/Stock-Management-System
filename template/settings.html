@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Forms</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<style media="screen">
+  h1{
+    font-size: 48px;
+  }
+
+  h3{
+   font-size: 28px;
+   margin-bottom: 50px;
+  }
+
+  form{
+    position: absolute;
+    left: 38%;
+    top: 15%;
+  }
+
+  input{
+    width: 250px;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+
+button{
+  width: 250px;
+  height: 38px;
+  font-weight: bold;
+margin-top: 20px;
+margin-left: 80px
+
+}
+
+.cancle{
+  position: absolute;
+  left: 38%;
+  top: 75%;
+}
+
+  label{
+    font-size: 20px;
+  }
+</style>
+
+  </head>
+  <body>
+
+<div class="container">
+  <form id="form" class="" method="POST">
+    <table style="width:100%">
+      <h1>Settings <img width=50px height=50px src="{% static 'images/settings.png' %}"></h1>
+      <h3>Configure Your Credentials.</h3>
+      {% for i in form %}
+      <tr>
+
+        <td><label id={{ i.label }} for="id">{{ i.label }}</label></td>
+        <td>{{ i }}</td>
+      </tr>
+      {% endfor %}
+        {% csrf_token %}
+      </table>
+    <button type="submit" class="btn btn-primary">Apply change</button>
+  </form>
+  <a href="{% url 'goto:index' %}"><button class="cancle btn btn-danger">Cancle</button></a>
+
+</div>
+
+  </body>
+</html>
